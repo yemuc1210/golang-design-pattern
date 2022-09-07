@@ -7,7 +7,7 @@ var manager *PrototypeManager
 type Type1 struct {
 	name string
 }
-
+// 实现clone接口
 func (t *Type1) Clone() Cloneable {
 	tc := *t
 	return &tc

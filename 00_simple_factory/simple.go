@@ -1,7 +1,6 @@
 package simplefactory
 
 import "fmt"
-
 //API is interface
 type API interface {
 	Say(name string) string

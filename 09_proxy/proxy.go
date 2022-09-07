@@ -1,4 +1,7 @@
 package proxy
+//代理模式用于延迟处理操作或者在进行实际操作前后进行其它处理。
+// 用一个对象操作另一个对象，并提供相同的 API
+// 在原操作基础上，提供新的定制化操作
 
 type Subject interface {
 	Do() string
@@ -10,7 +13,9 @@ func (RealSubject) Do() string {
 	return "real"
 }
 
+// 代理类
 type Proxy struct {
+	// 进行封装，实现代理
 	real RealSubject
 }
 

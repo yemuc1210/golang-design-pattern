@@ -1,8 +1,13 @@
 package composite
 
 import "fmt"
+// 组合模式 对象的某个属性是同类对象的集合，可构造出一棵树
+//统一对象和对象集，使得使用相同接口使用对象和对象集。
+//组合模式常用于树状结构，用于统一叶子节点和树节点的访问，并且可以用于应用某一操作到所有子节点。
+
 
 type Component interface {
+	// parent 属性的操作
 	Parent() Component
 	SetParent(Component)
 	Name() string
@@ -12,14 +17,19 @@ type Component interface {
 }
 
 const (
+	// 叶子节点
 	LeafNode = iota
+	// 复合节点
 	CompositeNode
 )
 
+// 结果是Component实例，可以使用Leaf和Composite的实例
+// 要求Leaf Composite实现接口
 func NewComponent(kind int, name string) Component {
 	var c Component
 	switch kind {
 	case LeafNode:
+		// 可以使用相同的接口调用Leaf 和 Composite对象
 		c = NewLeaf()
 	case CompositeNode:
 		c = NewComposite()
@@ -54,7 +64,10 @@ func (c *component) AddChild(Component) {}
 
 func (c *component) Print(string) {}
 
+//  LeafNode
 type Leaf struct {
+	// Leaf 内部封装component实例，及成立已经实现的方法
+	// 则Leaf 也实现了Component接口
 	component
 }
 
@@ -65,9 +78,11 @@ func NewLeaf() *Leaf {
 func (c *Leaf) Print(pre string) {
 	fmt.Printf("%s-%s\n", pre, c.Name())
 }
-
+// 复合节点实例
 type Composite struct {
+	// 同Leaf， 实现了Component接口
 	component
+	// 树节点， 所有子节点
 	childs []Component
 }
 

@@ -1,5 +1,7 @@
 package builder
 
+// 把对象创建过程分成多步
+
 //Builder 是生成器接口
 type Builder interface {
 	Part1()
